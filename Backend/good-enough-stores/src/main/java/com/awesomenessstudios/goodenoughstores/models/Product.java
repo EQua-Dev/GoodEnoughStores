@@ -11,7 +11,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Product {
@@ -32,4 +31,13 @@ public class Product {
     // One product can have many images, Cascade allows that once the referenced product is deleted, all associated images are too
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Image> images;
+
+    public Product(String name, String brand, BigDecimal price, int stock, String description, Category category) {
+        this.name = name;
+        this.brand = brand;
+        this.price = price;
+        this.stock = stock;
+        this.description = description;
+        this.category = category;
+    }
 }
