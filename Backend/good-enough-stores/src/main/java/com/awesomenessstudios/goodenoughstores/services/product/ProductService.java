@@ -1,6 +1,7 @@
 package com.awesomenessstudios.goodenoughstores.services.product;
 
 import com.awesomenessstudios.goodenoughstores.exceptions.ProductNotFoundException;
+import com.awesomenessstudios.goodenoughstores.exceptions.ResourceNotFoundException;
 import com.awesomenessstudios.goodenoughstores.models.Category;
 import com.awesomenessstudios.goodenoughstores.models.Product;
 import com.awesomenessstudios.goodenoughstores.repositories.CategoryRepository;
@@ -51,7 +52,7 @@ public class ProductService implements IProductService {
 
     @Override
     public Product getProductById(Long id) {
-        return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product Not Found"));
+        return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product Not Found"));
     }
 
     @Override
