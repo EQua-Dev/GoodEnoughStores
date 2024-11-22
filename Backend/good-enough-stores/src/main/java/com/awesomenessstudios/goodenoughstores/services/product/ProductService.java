@@ -56,7 +56,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public void deleteProductsById(Long Id) {
+    public void deleteProductById(Long Id) {
         productRepository.findById(Id).ifPresentOrElse(productRepository::delete,
                 () -> {
                     throw new ProductNotFoundException("Product Not Found");
