@@ -1,5 +1,6 @@
 package com.awesomenessstudios.goodenoughstores.services.product;
 
+import com.awesomenessstudios.goodenoughstores.dto.ProductDto;
 import com.awesomenessstudios.goodenoughstores.models.Product;
 import com.awesomenessstudios.goodenoughstores.requests.AddProductRequest;
 import com.awesomenessstudios.goodenoughstores.requests.ProductUpdateRequest;
@@ -29,4 +30,8 @@ public interface IProductService {
     List<Product> getProductByBrandAndName(String brand, String name);
 
     Long countProductsByBrandAndName(String brand, String name);
+
+    List<ProductDto> getConvertedProducts(List<Product> products);
+
+    ProductDto convertToDto(Product product);
 }
