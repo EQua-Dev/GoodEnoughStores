@@ -74,20 +74,21 @@ public class ProductController {
 
     }
 
-    @GetMapping("/by/brand-and-name/")
+    @GetMapping("/by-brand-and-name")
     public ResponseEntity<ApiResponse> getProductsByBrandAndName(@RequestParam String brandName, @RequestParam String productName) {
         try {
             List<Product> products = productService.getProductByBrandAndName(brandName, productName);
             if (products.isEmpty()) {
                 return ResponseEntity.status(NOT_FOUND).body(new ApiResponse("No products found", null));
             }
-            return ResponseEntity.ok(new ApiResponse("Found", products));
+            List<ProductDto> convertedProducts = productService.getConvertedProducts(products);
+            return ResponseEntity.ok(new ApiResponse("Found", convertedProducts));
         } catch (Exception e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage(), null));
         }
     }
 
-    @GetMapping("/by/category-and-brand/")
+    @GetMapping("/by-category-and-brand")
     public ResponseEntity<ApiResponse> getProductsByCategoryAndBrand(@RequestParam String categoryName, @RequestParam String brandName) {
         try {
             List<Product> products = productService.getProductByCategoryAndBrand(categoryName, brandName);
@@ -102,7 +103,7 @@ public class ProductController {
     }
 
 
-    @GetMapping("/by/name/{productName}")
+    @GetMapping("/by-name/{productName}")
     public ResponseEntity<ApiResponse> getProductsByName(@PathVariable String productName) {
         try {
             List<Product> products = productService.getProductByName(productName);
@@ -147,7 +148,7 @@ public class ProductController {
     }
 
 
-   @GetMapping("/count/by/brand-and-name/")
+   @GetMapping("/count/by-brand-and-name")
     public ResponseEntity<ApiResponse> countProductsByBrandAndName(@RequestParam String brandName, @RequestParam String productName) {
         try {
             var productCount = productService.countProductsByBrandAndName(brandName, productName);
